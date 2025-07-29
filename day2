@@ -1,0 +1,92 @@
+How to access centralized Artifactory
+http://65.2.152.172:8082/
+admin
+DevOPs#12087
+
+http://65.2.152.172:8082/
+
+http://65.2.152.172:8082/
+admin
+DevOPs#12087
+
+How to upload/Download Packages in Artifactory using
+ 
+- Maven
+- Gradle
+- Npm
+- Python
+- Docker
+- Nuget
+============================================================
+How to upload/Download Packages in Artifactory using 
+<blockquote class="wp-embedded-content" data-secret="dHqVtqmy2T"><a href="https://www.devopsschool.com/blog/how-to-upload-a-package-using-maven-in-artifactory/">How to Upload a package using Maven in Artifactory?</a></blockquote><iframe class="wp-embedded-content" sandbox="allow-scripts" security="restricted" style="position: absolute; visibility: hidden;" title="“How to Upload a package using Maven in Artifactory?” — DevOpsSchool.com" src="https://www.devopsschool.com/blog/how-to-upload-a-package-using-maven-in-artifactory/embed/#?secret=9rQbT8i1Nc#?secret=dHqVtqmy2T" data-secret="dHqVtqmy2T" width="600" height="338" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+- Maven
+
+Step 1 - install java
+<blockquote class="wp-embedded-content" data-secret="xREvfi7yib"><a href="https://www.devopsschool.com/blog/complete-guide-of-java-installation-in-linux/">Java Installation Guide in Linux & Windows</a></blockquote><iframe class="wp-embedded-content" sandbox="allow-scripts" security="restricted" style="position: absolute; visibility: hidden;" title="“Java Installation Guide in Linux & Windows” — DevOpsSchool.com" src="https://www.devopsschool.com/blog/complete-guide-of-java-installation-in-linux/embed/#?secret=EMsYYIaN3Y#?secret=xREvfi7yib" data-secret="xREvfi7yib" width="600" height="338" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+$ sudo apt update
+$ sudo apt install openjdk-17-jdk -y
+$ sudo apt install openjdk-17-jre -y
+$ java --version
+
+Step 2 - Install Maven
+<blockquote class="wp-embedded-content" data-secret="ao9DjOYI2U"><a href="https://www.devopsschool.com/blog/how-to-install-configure-maven/">How to install & configure Maven</a></blockquote><iframe class="wp-embedded-content" sandbox="allow-scripts" security="restricted" style="position: absolute; visibility: hidden;" title="“How to install & configure Maven” — DevOpsSchool.com" src="https://www.devopsschool.com/blog/how-to-install-configure-maven/embed/#?secret=L31oJ2JMhC#?secret=ao9DjOYI2U" data-secret="ao9DjOYI2U" width="600" height="338" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+$ apt install maven
+$ mvn --version
+
+Step 3 - Create a project
+
+Company Name - DevOpsSchool
+Component - Chat
+
+mvn archetype:generate -DgroupId=com.devopsschool.chat -DartifactId=chat -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+
+
+Step 4 - Modify pom.xml and setting.xml
+
+pom.xml - set the repo location - /root/maven/chat/pom.xml
+
+<distributionManagement>
+    <repository>
+        <id>central</id>
+        <name>ip-172-31-46-36-releases</name>
+        <url>http://65.2.152.172:8081/artifactory/devopsschool-local</url>
+    </repository>
+    <snapshotRepository>
+        <id>snapshots</id>
+        <name>ip-172-31-46-36-snapshots</name>
+        <url>http://65.2.152.172:8081/artifactory/devopsschool-local</url>
+    </snapshotRepository>
+</distributionManagement>
+
+
+setting.xml - set the access - /etc/maven/settings.xml
+<blockquote class="wp-embedded-content" data-secret="dHqVtqmy2T"><a href="https://www.devopsschool.com/blog/how-to-upload-a-package-using-maven-in-artifactory/">How to Upload a package using Maven in Artifactory?</a></blockquote><iframe class="wp-embedded-content" sandbox="allow-scripts" security="restricted" style="position: absolute; visibility: hidden;" title="“How to Upload a package using Maven in Artifactory?” — DevOpsSchool.com" src="https://www.devopsschool.com/blog/how-to-upload-a-package-using-maven-in-artifactory/embed/#?secret=9rQbT8i1Nc#?secret=dHqVtqmy2T" data-secret="dHqVtqmy2T" width="600" height="338" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+
+    <server>
+      <username>admin</username>
+      <password>DevOPs#12087</password>
+      <id>central</id>
+    </server>
+
+    <server>
+      <username>admin</username>
+      <password>DevOPs#12087</password>
+      <id>snapshots</id>
+    </server>
+
+admin
+DevOPs#12087
+
+
+Step 5 - Upload the package
+
+$ mvn deploy
+
+
+ERROR for Java Compilcation
+
+<properties>
+     <maven.compiler.source>1.8</maven.compiler.source>
+     <maven.compiler.target>1.8</maven.compiler.target>
+</properties>
